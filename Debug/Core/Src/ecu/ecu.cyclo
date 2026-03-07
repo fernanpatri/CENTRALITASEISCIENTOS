@@ -1,0 +1,2 @@
+../Core/Src/ecu/ecu.c:9:6:ecu_init	1
+../Core/Src/ecu/ecu.c:14:6:ecu_loop	3
