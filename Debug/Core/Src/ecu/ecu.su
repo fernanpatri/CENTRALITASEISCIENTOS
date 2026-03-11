@@ -1,2 +1,0 @@
-../Core/Src/ecu/ecu.c:10:6:ecu_init	8	static
-../Core/Src/ecu/ecu.c:15:6:ecu_loop	24	static,ignoring_inline_asm
