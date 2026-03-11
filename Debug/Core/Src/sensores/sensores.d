@@ -32,7 +32,8 @@ Core/Src/sensores/sensores.o: ../Core/Src/sensores/sensores.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
- ../Core/Inc/sensores/sensores.h
+ ../Core/Inc/sensores/sensores.h \
+ ../Core/Inc/sensores/calibracion/calibracion.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -68,3 +69,4 @@ Core/Src/sensores/sensores.o: ../Core/Src/sensores/sensores.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../Core/Inc/sensores/sensores.h:
+../Core/Inc/sensores/calibracion/calibracion.h:

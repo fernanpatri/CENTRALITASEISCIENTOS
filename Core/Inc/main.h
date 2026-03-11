@@ -57,12 +57,22 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ENTRADA_RPM_Pin GPIO_PIN_0
+#define ENTRADA_RPM_GPIO_Port GPIOA
 #define ECU2_Pin GPIO_PIN_2
 #define ECU2_GPIO_Port GPIOA
 #define ECU_Pin GPIO_PIN_3
 #define ECU_GPIO_Port GPIOA
 #define DEBUG_CPU_Pin GPIO_PIN_4
 #define DEBUG_CPU_GPIO_Port GPIOA
+#define T_AIRE_Pin GPIO_PIN_7
+#define T_AIRE_GPIO_Port GPIOA
+#define T_MOTOR_Pin GPIO_PIN_5
+#define T_MOTOR_GPIO_Port GPIOC
+#define ACELERADOR_Pin GPIO_PIN_0
+#define ACELERADOR_GPIO_Port GPIOB
+#define INYECTOR_Pin GPIO_PIN_9
+#define INYECTOR_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 

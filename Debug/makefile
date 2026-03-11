@@ -11,8 +11,10 @@ RM := rm -rf
 -include sources.mk
 -include Drivers/STM32H7xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
+-include Core/Src/sensores/calibracion/subdir.mk
 -include Core/Src/sensores/subdir.mk
 -include Core/Src/ecu/subdir.mk
+-include Core/Src/control/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
 
@@ -62,8 +64,8 @@ all: main-build
 main-build: PROYECTOSEISCIENTOS1.elf secondary-outputs
 
 # Tool invocations
-PROYECTOSEISCIENTOS1.elf PROYECTOSEISCIENTOS1.map: $(OBJS) $(USER_OBJS) C:\Users\fguti\STM32CubeIDE\workspace_1.18.1\PROYECTOSEISCIENTOS1\STM32H743VITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "PROYECTOSEISCIENTOS1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\fguti\STM32CubeIDE\workspace_1.18.1\PROYECTOSEISCIENTOS1\STM32H743VITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PROYECTOSEISCIENTOS1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+PROYECTOSEISCIENTOS1.elf PROYECTOSEISCIENTOS1.map: $(OBJS) $(USER_OBJS) J:\BROTO\PROYECTOSEISCIENTOS1\STM32H743VITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "PROYECTOSEISCIENTOS1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"J:\BROTO\PROYECTOSEISCIENTOS1\STM32H743VITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PROYECTOSEISCIENTOS1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
