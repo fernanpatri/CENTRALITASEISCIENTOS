@@ -48,7 +48,11 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN PV */
-
+extern volatile float dbg_temp_engine;
+extern volatile float dbg_temp_air;
+extern volatile uint16_t dbg_throttle;
+extern volatile uint32_t dbg_rpm;
+extern volatile uint16_t dbg_throttle_percent;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/

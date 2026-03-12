@@ -7,6 +7,12 @@
 volatile uint8_t ecu_tick = 0;
 static uint8_t counter_100ms = 0;
 static uint16_t counter_1s = 0;
+
+volatile float dbg_temp_engine;
+volatile float dbg_temp_air;
+volatile uint16_t dbg_throttle;
+volatile uint32_t dbg_rpm;
+volatile uint16_t dbg_throttle_percent;
 void ecu_init(void)
 {
 	sensors_init();
@@ -21,19 +27,30 @@ void ecu_loop(void)
 
 	 sensors_update();
 
-	 volatile  uint16_t temp = sensors.temp_engine;
+	  rpm_timeout_update();
 
-	 uint16_t temp_air = sensors.temp_air;
+        uint32_t rpm;
 
-	 uint16_t throttle = sensors.throttle;
-
-	 rpm_timeout_update();
-
-	 uint32_t rpm;
-
-	    __disable_irq();
+__disable_irq();
 	    rpm = engine_rpm;
 	    __enable_irq();
+
+	  /* copiar valores para debug */
+
+	    dbg_temp_engine = sensors.temp_engine;
+	    dbg_temp_air = sensors.temp_air;
+	    dbg_throttle = sensors.throttle_adc;
+	    dbg_rpm = rpm;
+	    dbg_throttle_percent = sensors.throttle_percent;
+
+	// volatile float temp = sensors.temp_engine;
+	// volatile float temp_air = sensors.temp_air;
+	// volatile uint16_t throttle = sensors.throttle_adc;
+
+
+
+
+
 
 
 
