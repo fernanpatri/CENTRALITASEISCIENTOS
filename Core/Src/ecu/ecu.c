@@ -21,7 +21,7 @@ void ecu_loop(void)
 
 	 sensors_update();
 
-	 uint16_t temp = sensors.temp_engine;
+	 volatile  uint16_t temp = sensors.temp_engine;
 
 	 uint16_t temp_air = sensors.temp_air;
 
