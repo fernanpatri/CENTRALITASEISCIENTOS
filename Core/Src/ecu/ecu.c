@@ -3,6 +3,7 @@
 #include "ecu/ecu.h"
 #include "sensores/sensores.h"
 #include "control/rpm.h"
+#include "control/fuel.h"
 
 volatile uint8_t ecu_tick = 0;
 static uint8_t counter_100ms = 0;
@@ -42,6 +43,15 @@ __disable_irq();
 	    dbg_throttle = sensors.throttle_adc;
 	    dbg_rpm = rpm;
 	    dbg_throttle_percent = sensors.throttle_percent;
+
+
+
+
+	    uint16_t pw;
+
+	    pw = fuel_calculate_pw(
+	            rpm,
+	            sensors.throttle_percent);
 
 	// volatile float temp = sensors.temp_engine;
 	// volatile float temp_air = sensors.temp_air;
