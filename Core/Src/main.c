@@ -53,6 +53,10 @@ extern volatile float dbg_temp_air;
 extern volatile uint16_t dbg_throttle;
 extern volatile uint32_t dbg_rpm;
 extern volatile uint16_t dbg_throttle_percent;
+volatile uint16_t tiempo_base_pw = 0;
+volatile uint16_t cranking_enrich_percent= 0;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
