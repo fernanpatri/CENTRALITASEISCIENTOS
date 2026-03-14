@@ -1,45 +1,83 @@
 #include "control/enriquecimiento/e_arranque.h"
 
-
 /*
-Tabla de enriquecimiento de arranque
-valores en porcentaje
-
-temp_index debe venir del sensor de temperatura
-ya convertido a índice de tabla
+Enriquecimiento de arranque en frío
+basado en temperatura del motor
 */
 
+/* variable global para ver en debugger */
+volatile uint16_t cranking_enrich_percent = 100;
 
 
-
-static const uint16_t cranking_enrichment_table[8] =
+/* eje de temperaturas (°C) */
+static const int8_t cranking_temp_axis[8] =
 {
-    300,   // -10C
-    260,   // 0C
-    220,   // 10C
-    190,   // 20C
-    160,   // 30C
-    140,   // 40C
-    120,   // 60C
-    110    // 80C
+    -10,
+    0,
+    10,
+    20,
+    30,
+    40,
+    60,
+    80
 };
 
 
-
-/* devuelve porcentaje de enriquecimiento */
-
-uint16_t enrichment_cranking_get(uint8_t temp_index)
+/* tabla de enriquecimiento (%) */
+static const uint16_t cranking_enrichment_table[8] =
 {
-    if (temp_index > 7)
-        temp_index = 7;
+    300,   // -10°C
+    260,   // 0°C
+    220,   // 10°C
+    190,   // 20°C
+    160,   // 30°C
+    140,   // 40°C
+    120,   // 60°C
+    110    // 80°C
+};
 
-    return cranking_enrichment_table[temp_index];
+
+/* obtiene el enriquecimiento interpolado según temperatura */
+
+uint16_t enrichment_cranking_get(int16_t temp)
+{
+    uint8_t i;
+
+    /* límites de tabla */
+
+    if (temp <= cranking_temp_axis[0])
+        return cranking_enrichment_table[0];
+
+    if (temp >= cranking_temp_axis[7])
+        return cranking_enrichment_table[7];
+
+    /* buscar intervalo */
+
+    for (i = 0; i < 7; i++)
+    {
+        if (temp < cranking_temp_axis[i+1])
+        {
+            int16_t t1 = cranking_temp_axis[i];
+            int16_t t2 = cranking_temp_axis[i+1];
+
+            uint16_t e1 = cranking_enrichment_table[i];
+            uint16_t e2 = cranking_enrichment_table[i+1];
+
+            /* interpolación lineal */
+
+            return e1 + ((temp - t1) * (e2 - e1)) / (t2 - t1);
+        }
+    }
+
+    return cranking_enrichment_table[7];
 }
-// aplica enriquecimiento
-uint16_t enrichment_cranking_apply(uint16_t base_pw, uint8_t temp_index)
+
+
+/* aplica enriquecimiento al tiempo de inyección */
+
+uint16_t enrichment_cranking_apply(uint16_t base_pw, int16_t temp)
 {
-    cranking_enrich_percent = enrichment_cranking_get(temp_index);
+    cranking_enrich_percent = enrichment_cranking_get(temp);
 
     return (base_pw * cranking_enrich_percent) / 100;
 }
-

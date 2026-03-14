@@ -17,3 +17,28 @@ const uint16_t fuel_table[RPM_POINTS][TPS_POINTS] =
 {1800,2200,2650,3150,3650,4150,4600,5050},
 {1850,2300,2800,3350,3900,4450,4950,5450}
 };
+uint16_t tabla_rpm_tps(uint16_t rpm, uint8_t tps)
+{
+    uint8_t i;
+    uint8_t j;
+
+    /* buscar índice de RPM */
+
+    for(i = 0; i < RPM_POINTS - 1; i++)
+    {
+        if(rpm < rpm_bins[i+1])
+            break;
+    }
+
+    /* buscar índice de TPS */
+
+    for(j = 0; j < TPS_POINTS - 1; j++)
+    {
+        if(tps < tps_bins[j+1])
+            break;
+    }
+
+    /* devolver valor de tabla */
+
+    return fuel_table[i][j];
+}
